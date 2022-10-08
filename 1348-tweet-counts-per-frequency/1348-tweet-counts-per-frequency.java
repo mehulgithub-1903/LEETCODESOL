@@ -35,6 +35,7 @@ class TweetCounts {
         for (Map.Entry<Integer, Integer> entry : tweetMap.subMap(startTime, endTime + 1).entrySet()) {
             
             int index = (entry.getKey() - startTime) / interval;
+            
             buckets[index] += entry.getValue();
         }
         
