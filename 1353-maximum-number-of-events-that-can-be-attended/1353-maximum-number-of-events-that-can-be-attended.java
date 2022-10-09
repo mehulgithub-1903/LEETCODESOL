@@ -9,20 +9,26 @@ class Solution {
         
         for(int day=1;day<=100000;day++)
         {
-           while(i<events.length && events[i][0]==day)
+//            remove the events that are over
+            
+            
+            while(!pq.isEmpty() && pq.peek()<day) 
+           {
+               pq.poll();
+           }
+//             add the events that start today
+            while(i<events.length && events[i][0]==day)
            {
                pq.add(events[i][1]);
                i++;
            }             
-           while(!pq.isEmpty() && pq.peek()<day) 
-           {
-               pq.poll();
-           }
+//            pick the event with nearest deadline if any 
             if(!pq.isEmpty()) 
             {
               pq.poll();
               count++;
             }
+            
         }
         return count;
     }
