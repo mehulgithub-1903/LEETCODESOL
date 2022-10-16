@@ -10,18 +10,23 @@ class Solution(object):
                 productFrequency[squareOfElement]+=1
             else:
                 productFrequency[squareOfElement]=1
+        
         ans=0
-        for j in range(len(y)):
-            for k in range(j+1,len(y)):
+        for element in productFrequency:
+            mp={}
+            for e in y:
+               
                 
-                product=y[j]*y[k]
-                if product in productFrequency:
-                    key=product
-                    ans+=productFrequency[key]
+                # print(key)
+                if element%e==0 and element//e in mp:
+                    key=element//e
+                    ans+=mp[key]*productFrequency[element]
+                    # print(ans)  
+                if e in mp:
+                    mp[e]+=1
+                else:mp[e]=1
+                # print(mp)
+                    
         return ans
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: int
-        """
+        
         
