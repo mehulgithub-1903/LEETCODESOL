@@ -36,8 +36,7 @@ public void Sum(int matrix[][])
 {
     int n=matrix.length;
     int m=matrix[0].length;
-    // int [][] ans=new int[n][m];
-    // int sum=0;
+
     for(int i=1;i<=n;i++)
     {
         for(int j=1;j<=m;j++)
