@@ -2,6 +2,12 @@ class Solution {
     public long subArrayRanges(int nums[])
 {
     
+//         nge -> next greater element 
+//         nse  -> next smaller element
+        
+//          pse -> previous smaller element
+        
+//          pge -> previous greater element   
     int n=nums.length;
     long nge[]=nge(nums);
     long nse[]=nse(nums);
