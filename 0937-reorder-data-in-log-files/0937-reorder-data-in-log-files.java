@@ -1,69 +1,53 @@
+
+public class MyComparator implements Comparator<String>
+{
+    @Override
+    public int compare(String s1, String s2)
+    {
+        int indexOfSpace1=s1.indexOf(" ");
+        int indexOfSpace2=s2.indexOf(" ");
+
+        String identifier1 = s1.substring(0,indexOfSpace1+1);
+        String identifier2 = s2.substring(0,indexOfSpace2+1);
+        String content1=    s1.substring(indexOfSpace1+1);
+        String content2=    s2.substring(indexOfSpace2+1);
+        
+        
+        char firstCharacterS1 =s1.charAt(indexOfSpace1+1);
+        char firstCharacterS2 =s2.charAt(indexOfSpace2+1);
+
+        //  char <=9 is to check a character is a digit or not
+        if(firstCharacterS1<='9')
+        {
+            if(firstCharacterS2<='9') return 0;
+
+            return 1;
+        }
+
+        if(firstCharacterS2<='9') 
+        {
+            return -1;
+            // priority to first parameter that is s1
+        }
+
+        if(content1.compareTo(content2)!=0)
+        {
+            return content1.compareTo(content2);
+        }
+        else
+        {
+            return identifier1.compareTo(identifier2);
+        }
+        
+
+    }
+}
+
+
 class Solution {
     
     public String[] reorderLogFiles(String[] logs) {
-        
-        Set<Character> digits=new HashSet<>();
-        
-        // for(char i='1';i<='9';i++) digits.add()
-        
-        PriorityQueue<String> pq=new PriorityQueue<>(
-            ((String a,String b) ->
-             
-            contentOfLetterLog(a).compareTo(contentOfLetterLog(b))==0?((a.split(" ")[0]).compareTo(b.split(" ")[0])):contentOfLetterLog(a).compareTo(contentOfLetterLog(b))
-            ));
-        
-        
-        List<String> digiLogs=new ArrayList<String>();
-        for(String e:logs)
-        {
-            if(isDigitLog(e))
-            {
-                digiLogs.add(e);        
-            }
-            else
-            {
-                pq.add(e);
-            }
-        }
-        List<String> result=new ArrayList<String>();
-        
-        
-        while(!pq.isEmpty())
-        {
-            result.add(pq.poll());
-        }
-        
-        result.addAll(digiLogs);
-        
-        int n=logs.length;
-        for(int i=0;i<n;i++) logs[i]=result.get(i);
-        
+        Arrays.sort(logs,new MyComparator());
         return logs;
-    }
-    public String contentOfLetterLog(String letterLog)
-    {
-        // String logs[]=letterLog.split(" ");
-        // int n=logs.length;
-        String content="";
-        
-//         for(int i=1;i<n;i++)
-//         {
-//             content+=logs[i];
-//         }
-        
-        int index=letterLog.indexOf(' ');
-        content=letterLog.substring(index+1);
-        return content; 
-    }
-    public boolean isDigitLog(String log)
-    {
-        String arr[]=log.split(" ");
-        
-        if(Character.isDigit(arr[1].charAt(0)))
-        {
-            return true;
-        }
-        
-        return false;
     }
 }
